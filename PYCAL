@@ -1,0 +1,166 @@
+from ast import operator
+from tkinter import*
+
+from sympy import false 
+
+errorstate = False
+myoperator = ""
+current_message = ""
+CALCULATOR = Tk()
+CALCULATOR.title ("olical")
+
+# CACULATOR.iconbitmap("calpic.ico")
+CALCULATOR.resizable(width=False, height=False)
+
+
+e = Entry(CALCULATOR, width=40, borderwidth=10)
+
+def enterdigit(number):
+    global errorstate
+    if errorstate == True:
+        myscreen.delete(0,END)
+        errorstate = False
+    else:
+        pass
+
+    currentnum = myscreen.get()
+    myscreen.delete(0,END)
+    
+    myscreen.insert(0,currentnum + str(number))
+    
+    
+def clearSreen(CAL):
+    myscreen.delete(0, END)
+def mySUM(CAL):
+    global current_message
+    global myoperator
+    myoperator =  CAL
+    firstnum = myscreen.get ( ) 
+    myscreen.delete(0, END)
+    myscreen.insert(0, firstnum + "+")
+    current_message = myscreen.get()
+
+def myMinus(CAL):
+    global myoperator
+    global current_message
+    myoperator =  CAL
+    firstnum = myscreen.get ( ) 
+    myscreen.delete(0, END)
+    myscreen.insert(0, firstnum + "-")
+    current_message = myscreen.get()
+
+def myDiv(CAL):
+    global current_message
+    global myoperator
+    myoperator =  CAL
+    firstnum = myscreen.get() 
+    myscreen.delete(0, END)
+    myscreen.insert(0, firstnum + "/")
+    current_message = myscreen.get()
+    print("current messagen is " + str(current_message))
+    # except ZeroDivisionError:
+    #     myscreen.insert(0, firstnum + "can not divide by zero")
+    
+
+
+
+def evaluate(cal):
+    global errorstate
+    global current_message
+    global myoperator
+    print("current messagen is " + str(current_message))
+    secound_num = myscreen.get().replace(current_message,"")
+    print(secound_num)
+    if int(secound_num) == 0 and myoperator == "/":
+        myscreen.delete(0, END)
+        myscreen.insert(0,  "error")
+        errorstate = True
+    else:
+        
+        newmessage = eval(myscreen.get())
+        myscreen.delete(0, END)
+        myscreen.insert(0, newmessage)
+  
+  
+    # except:
+
+    #     myscreen.delete(0, END)
+        
+    #     myscreen.insert(0,  "error")
+        # evaluate(cal)
+
+
+        # def clearSreen(CAL):
+        #  myscreen.delete(0, END)
+    
+
+
+    # newmessage = myscreen.get
+
+    # return 
+def clear(self):
+    myscreen.delete(0, END)
+    myscreen.operator = ""
+        # self.entry.delete(0,END)
+        # self.operator =""
+myscreen = Entry(CALCULATOR, width= 40, borderwidth=10,fg="black")
+myscreen.grid(row= 0, column=0, columnspan=4, padx= 40, pady=10, ipady = 20)
+button1 =  Button(CALCULATOR, text = "1", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit ("1") )
+button2 =  Button(CALCULATOR, text = "2", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("2"))
+button3 =  Button(CALCULATOR, text = "3", padx=40, pady= 20,bg = "gray35", fg="white", command= lambda: enterdigit("3"))
+
+button4 =  Button(CALCULATOR, text = "4", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("4") )
+button5 =  Button(CALCULATOR, text = "5", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("5"))
+button6 =  Button(CALCULATOR, text = "6", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("6"))
+
+button7 =  Button(CALCULATOR, text = "7", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("7"))
+button8 =  Button(CALCULATOR, text = "8", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("8"))
+button9 =  Button(CALCULATOR, text = "9", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("9"))
+button10 =  Button(CALCULATOR, text = "0", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("0"))
+button11 =  Button(CALCULATOR, text = "(", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("("))
+button12 =  Button(CALCULATOR, text = ")", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit(")"))
+button13 =  Button(CALCULATOR, text = "*", padx=40, pady= 20,bg = "gray35", fg="white" , command= lambda: enterdigit("*"))
+
+
+
+plus = Button(CALCULATOR, text = "+", padx=40, pady= 20  , command= lambda: mySUM("+")) 
+plus.grid(row=1, column=3)
+minus = Button(CALCULATOR, text = "-", padx=40, pady= 20 , command= lambda: myMinus("-")) 
+minus.grid(row=2, column=3)
+divide = Button(CALCULATOR, text = "/", padx=40, pady= 20 , command= lambda: myDiv("/"))  
+divide.grid(row=3, column=3)
+equal = Button(CALCULATOR, text = "=", padx=180, pady= 20 , command= lambda: evaluate("=")) 
+equal.grid(row=5, column=0,columnspan=4)
+clear = Button(CALCULATOR, text = "C", padx=180, pady= 20 , command= lambda: clearSreen("C")) 
+clear.grid(row=6, column=0,columnspan=4)
+
+
+
+
+
+button1.grid(row=1, column=0)
+button2.grid(row=1, column=1)
+button3.grid(row=1, column=2)
+
+button4.grid(row=2, column=0)
+button5.grid(row=2, column=1)
+button6.grid(row=2, column=2)
+
+button7.grid(row=3, column=0)
+button8.grid(row=3, column=1)
+button9.grid(row=3, column=2)
+
+button10.grid(row=4, column=2)
+button11.grid(row=4, column=0)
+button12.grid(row=4, column=1)
+button13.grid(row=4, column=3)
+
+
+
+CALCULATOR.mainloop()
+
+
+
+
+
+
